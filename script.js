@@ -4,17 +4,8 @@ let newGameBtn = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-container");
 let msg = document.querySelector("#msg");
 
-let turnO = true; //player x ,player 0
+let turnO = true; // player O starts
 let count = 0;
-
-// let arr = ["apple", "orange", "litchi"];
-
-// //2D Array
-// let arr2 = [
-//   ["apple", "litchi"],
-//   ["potato", "mushroom"],
-//   ["pants", "shirts"],
-// ];
 
 const winPattern = [
   [0, 1, 2],
@@ -36,7 +27,6 @@ const resetGame = () => {
 
 boxes.forEach((box) => {
   box.addEventListener("click", () => {
-    console.log("box was cliked");
     if (turnO) {
       box.innerText = "O";
       turnO = false;
@@ -46,7 +36,6 @@ boxes.forEach((box) => {
     }
     box.disabled = true;
     count++;
-    checkWinner();
 
     let isWinner = checkWinner();
     if (count === 9 && !isWinner) {
@@ -86,7 +75,7 @@ const checkWinner = () => {
     let pos2Val = boxes[pattern[1]].innerText;
     let pos3Val = boxes[pattern[2]].innerText;
 
-    if (pos1Val != "" && pos2Val != "" && pos3Val != "") {
+    if (pos1Val !== "" && pos2Val !== "" && pos3Val !== "") {
       if (pos1Val === pos2Val && pos2Val === pos3Val) {
         console.log("winner", pos1Val);
         showWinner(pos1Val);
@@ -94,6 +83,7 @@ const checkWinner = () => {
       }
     }
   }
+  return false; 
 };
 
 newGameBtn.addEventListener("click", resetGame);
